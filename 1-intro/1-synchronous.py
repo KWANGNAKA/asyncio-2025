@@ -2,30 +2,36 @@ import time
 from datetime import datetime
 
 def make_burger(student_id):
-    print(f"[{datetime.now().strftime('%H:%M:%S')}] เริ่มทำเบอร์เกอร์ให้นักเรียนคนที่ {student_id}")
-    
-    print(f"[{datetime.now().strftime('%H:%M:%S')}] 1. ทอดเบอร์เกอร์...")
+    start_time = datetime.now()
+    start_timestamp = time.time() 
+    print(f"[{start_time.strftime('%H:%M:%S')}] เริ่มทำเบอร์เกอร์ให้นักเรียนคนที่ {student_id}")
+
+    print(f"[{datetime.now().strftime('%H:%M:%S')}] 1. ทอดเบอร์เกอร์... (นักเรียน {student_id})")
     time.sleep(5)
 
-    print(f"[{datetime.now().strftime('%H:%M:%S')}] 2. ทอดไก่...")
+    print(f"[{datetime.now().strftime('%H:%M:%S')}] 2. ทอดไก่... (นักเรียน {student_id})")
     time.sleep(5)
 
-    print(f"[{datetime.now().strftime('%H:%M:%S')}] 3. ใส่ผักและชีส...")
+    print(f"[{datetime.now().strftime('%H:%M:%S')}] 3. ใส่ผักและชีส... (นักเรียน {student_id})")
     time.sleep(5)
 
-    print(f"[{datetime.now().strftime('%H:%M:%S')}] 4. ห่อเบอร์เกอร์...")
+    print(f"[{datetime.now().strftime('%H:%M:%S')}] 4. ห่อเบอร์เกอร์... (นักเรียน {student_id})")
     time.sleep(5)
 
-    print(f"[{datetime.now().strftime('%H:%M:%S')}] เสร็จแล้ว! เบอร์เกอร์ของนักเรียนคนที่ {student_id}!")
+    end_time = datetime.now()
+    end_timestamp = time.time()
+    duration = end_timestamp - start_timestamp
+
+    print(f"[{end_time.strftime('%H:%M:%S')}]  เสร็จแล้ว! เบอร์เกอร์ของนักเรียนคนที่ {student_id} | เริ่ม: {start_time.strftime('%H:%M:%S')} | เสร็จ: {end_time.strftime('%H:%M:%S')} | ใช้เวลา: {duration:.2f} วินาที")
 
 def main():
     start = time.time()
-    
-    for i in range(1, 4):
+
+    for i in range(1, 6):  # นักเรียน 5 คน
         make_burger(i)
-    
+
     end = time.time()
-    print(f"[{datetime.now().strftime('%H:%M:%S')}] รวมเวลาทั้งหมด: {end - start:.2f} วินาที")
+    print(f"[{datetime.now().strftime('%H:%M:%S')}] ⏱ รวมเวลาทั้งหมด: {end - start:.2f} วินาที")
 
 if __name__ == "__main__":
     main()
