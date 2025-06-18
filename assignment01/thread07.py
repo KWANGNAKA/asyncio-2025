@@ -1,25 +1,24 @@
-# extending the Thread class and return values
-from time import sleep, ctime
-from threading import Thread
+# Working With Many Threads
+import threading
+import logging
+import time
 
-# custom thread class
-class CustomThread(Thread):
-    # override the run function
-    def run(self):
-        # block for a moment
-        sleep(1)
-        # display a message
-        print(f'{ctime()} This is coming from another thread')
-        # store return value
-        self.value = 99
+def thread_function(name):
+    logging.info("Thread %s: starting", name)
+    time.sleep(2)
+    logging.info("Thread %s: finishing", name)
 
-# create the thread
-thread = CustomThread()
-# start the thread
-thread.start()
-# wait for the thread to finish
-print(f'{ctime()} Waiting for the thread to finish')
-thread.join()
-# get the value returned from run
-value = thread.value
-print(f'{ctime()} Got: {value}')
+if __name__ == "__main__":
+    format = "%(asctime)s: %(message)s"
+    logging.basicConfig(format=format, level=logging.INFO, datefmt="%H:%M:%S")
+
+    threads = list()
+    for index in range(3):
+        # logging.info("Main    : create and start thread %d.", index)
+        x = threading.Thread(target=thread_function, args=(index,))
+        threads.append(x)
+        x.start()
+
+    for thread in threads:
+        thread.join()
+        # ไม่ต้อง log เมื่อ join เสร็จ
