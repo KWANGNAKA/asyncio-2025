@@ -1,20 +1,24 @@
-# running a function in another thread
+# extending the Thread class and return values
 from time import sleep, ctime
 from threading import Thread
+# custom thread class
+class CustomThread(Thread):
+    # override the run function
+    def run(self):
+        # block for a moment
+        sleep(1)
+        # display a message
+        print(f'{ctime()} This is coming from another thread')
+        # store return value
+        self.value = 99
 
-# a custom function that blocks for a moment
-def task():
-    # block for a moment
-    sleep(1)
-    # display a message
-    print(f'{ctime()} This is from another thread')
-
-# create a thread
-thread = Thread(target=task)
-
-# run the thread
+# create 
+thread = CustomThread()
+# start the thread
 thread.start()
-
-# wait for the thread to finish
-print(f'{ctime()} Waiting for the thread...')
+#w8
+print(f'{ctime()} Waiting for the thread to finish')
 thread.join()
+# get the value returned from run
+value = thread.value
+print(f'{ctime()} Got: {value}')
