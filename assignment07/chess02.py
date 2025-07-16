@@ -1,7 +1,7 @@
 import asyncio
 from datetime import timedelta
 
-speed = 10000
+speed = 1000
 Judit_time = 5 / speed
 Opponent_time = 55 / speed
 opponents = 24

@@ -1,7 +1,7 @@
 import time  
 from datetime import timedelta  
   
-speed = 10000  # speed  
+speed = 1000  # speed  
 Judit_time = 5/speed  # Judit time move  
 Opponent_time = 55/speed # Opponent time move  
 opponents = 24 # Number of opponnents  
