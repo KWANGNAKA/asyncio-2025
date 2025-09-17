@@ -27,12 +27,18 @@ async def work(n):
     print(f"Done {n}")
     return n
 
-async def main():
-    results = []
-    for i in range(3):
-        results.append(asyncio.create_task(work(i)))
-    for r in results:
-        print("Result:", await r)
+async def run_batch(start, count):
+    tasks = [asyncio.create_task(work(i)) for i in range(start, start + count)]
+    results = await asyncio.gather(*tasks)
+    return results
 
-asyncio.run(main())
+async def main():
+    # ชุดที่ 1: 0-2
+    results1 = await run_batch(0, 3)
+    print("Results1:", results1)
+
+    # ชุดที่ 2: 3-5
+    results2 = await run_batch(3, 3)
+    print("Results2:", results2)
+
 asyncio.run(main())

@@ -68,33 +68,22 @@ async def aggregate():
 
         # ใช้จุดกลางจากไฟล์ .env
         m = folium.Map(location=[float(cfg["LAT"]), float(cfg["LON"])], zoom_start=6)
+
         for svc in registry.values():
             try:
                 r = await client.get(svc["url"])
                 w = r.json()
-
                 popup = f"""
                 <b>{w['city']}</b><br>
                 Temp: {w['temperature']} °C<br>
                 Humidity: {w['humidity']}%<br>
                 {w['weather']}
                 """
-
-                # --- ปักหมุดตาม lat/lon ที่ service รายงาน ---
                 folium.Marker(
                     location=[float(w["lat"]), float(w["lon"])],
                     popup=popup,
                     tooltip=w["city"]
                 ).add_to(m)
-
-                # --- ปักหมุดบังคับตาม lat/lon จาก .env ของ aggregator ---
-                folium.Marker(
-                    location=[float(cfg["LAT"]), float(cfg["LON"])],
-                    popup=f"Fixed marker for {w['city']}",
-                    icon=folium.Icon(color="red", icon="info-sign"),
-                    tooltip=f"{cfg['CITY']} (fixed)"
-                ).add_to(m)
-
             except Exception as e:
                 print("Error fetching:", svc, e)
 
