@@ -24,5 +24,5 @@ async def main():
     tasks = [asyncio.create_task(worker(f"Task-{i}", i+1)) for i in range(3)]
     results = await asyncio.gather(*tasks)   
     print("Results:", results)
-
+    
 asyncio.run(main())

@@ -39,7 +39,6 @@ async def worker(id: int):
 async def main():
     tasks = []
 
-    
     for i in range(1, 4):
         tasks.append(asyncio.create_task(worker(i)))
 

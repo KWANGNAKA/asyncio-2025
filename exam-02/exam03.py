@@ -28,7 +28,6 @@
 # Timer B: 1 seconds left
 # Timer B finished
 
-
 import asyncio
 
 async def countdown(name: str, seconds: int):

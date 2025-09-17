@@ -7,6 +7,7 @@
 import asyncio
 
 async def risky_task():
+    await asyncio.sleep(1)
     raise ValueError("Something went wrong!")
 
 async def main():
